@@ -1,0 +1,652 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "DAOBlacklisted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "infoHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "proxyAdmin",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "governor",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IGTokenFactory.GTokenStandard",
+              "name": "standard",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "isRetired",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isBlacklisted",
+              "type": "bool"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct DAOFactory.DAO",
+          "name": "dao",
+          "type": "tuple"
+        }
+      ],
+      "name": "DAOCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "DAORetired",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "infoHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "proxyAdmin",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "governor",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IGTokenFactory.GTokenStandard",
+              "name": "standard",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "isRetired",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isBlacklisted",
+              "type": "bool"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct DAOFactory.DAO",
+          "name": "updatedDao",
+          "type": "tuple"
+        }
+      ],
+      "name": "DAOUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "prevOwner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnerChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "contract UpgradableProxy",
+          "name": "proxy",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "implementation",
+          "type": "address"
+        }
+      ],
+      "name": "ProxyCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_daoId",
+          "type": "uint256"
+        }
+      ],
+      "name": "blacklistDAO",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "changeOwner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_admins",
+          "type": "address[]"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint32",
+              "name": "minVotingDelay",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "maxVotingDelay",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "minVotingPeriod",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "maxVotingPeriod",
+              "type": "uint32"
+            },
+            {
+              "internalType": "bool",
+              "name": "isWhitelistRequired",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IGovernor.GovernorBaseConfig",
+          "name": "_baseConfig",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint32",
+              "name": "votingDelay",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "votingPeriod",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "quorumAttendance",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "quorumApproval",
+              "type": "uint32"
+            }
+          ],
+          "internalType": "struct IGovernor.GovernorConfig",
+          "name": "_governorConfig",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint32",
+              "name": "minTimelockDelay",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "maxTimelockDelay",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "delay",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "gracePeriod",
+              "type": "uint32"
+            }
+          ],
+          "internalType": "struct ITimelock.TimelockConfig",
+          "name": "_timelockConfig",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "_gToken",
+          "type": "address"
+        },
+        {
+          "internalType": "enum IGTokenFactory.GTokenStandard",
+          "name": "_standard",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "symbol",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "uint8",
+              "name": "decimals",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "initialSupply",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IVotes.Initialization",
+          "name": "_initialization",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_infoHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "createDAO",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_implementation",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_admin",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_initializeData",
+          "type": "bytes"
+        }
+      ],
+      "name": "createProxy",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "proxy_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "createProxyAdmin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "admin_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "daos",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "infoHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "proxyAdmin",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "governor",
+          "type": "address"
+        },
+        {
+          "internalType": "enum IGTokenFactory.GTokenStandard",
+          "name": "standard",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bool",
+          "name": "isRetired",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "isBlacklisted",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "_ids",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "daosInfo",
+      "outputs": [
+        {
+          "internalType": "bytes32[3][]",
+          "name": "stores",
+          "type": "bytes32[3][]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "blacklist",
+          "type": "bool"
+        }
+      ],
+      "name": "getDAOIds",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalDAOs",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_governorLogic",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_timelockLogic",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_gTokenFactory",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_daoId",
+          "type": "uint256"
+        }
+      ],
+      "name": "isDAOBlacklisted",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_daoId",
+          "type": "uint256"
+        }
+      ],
+      "name": "isDAOExisted",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_daoId",
+          "type": "uint256"
+        }
+      ],
+      "name": "isDAORetired",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_daoId",
+          "type": "uint256"
+        }
+      ],
+      "name": "retireDAO",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_daoId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "infoHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "address",
+              "name": "proxyAdmin",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "governor",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IGTokenFactory.GTokenStandard",
+              "name": "standard",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "isRetired",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isBlacklisted",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct DAOFactory.DAO",
+          "name": "_updatedDAO",
+          "type": "tuple"
+        }
+      ],
+      "name": "updateDAO",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

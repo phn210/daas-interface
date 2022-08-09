@@ -1,0 +1,18 @@
+{
+  "cSpell.words": [
+    "bgcolor",
+    "deepmerge",
+    "Highcharts",
+    "Multicall",
+    "notistack",
+    "Numberish",
+    "rtrava",
+    "unclaimable"
+  ],
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+  "typescript.preferences.quoteStyle": "single"
+}

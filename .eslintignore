@@ -1,0 +1,4 @@
+/build/**
+/resources/**
+!.eslintrc.js
+/coverage
