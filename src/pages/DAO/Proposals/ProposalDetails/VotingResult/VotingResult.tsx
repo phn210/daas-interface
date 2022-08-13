@@ -7,7 +7,7 @@ import { useWeb3Context } from 'src/contexts/web3-context';
 import { CanCelledCircleIcon, CheckCircleFillIcon } from 'src/icons';
 import { getErrorMessage } from 'src/utils';
 import { compactNumber } from 'src/utils/format';
-import RangeStick from '../../ProposalItem/RangeStick/RangeStick';
+import RangeStick from '../../ProposalList/ProposalItem/RangeStick/RangeStick';
 import { VotingResultRootStyle } from './VotingResultRootStyle';
 
 const EnumStatus: string[] = [

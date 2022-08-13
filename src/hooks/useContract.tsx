@@ -124,30 +124,50 @@ export function useLotteryContract() {
   return useContract<Lottery>(contractAddresses.LOTTERY_ADDRESS, Lottery__factory.connect);
 }
 
-export function useDAOFactoryContract(address?: string) {
-  return useContract<DAOFactory>(address ?? ZERO_ADDRESS, DAOFactory__factory.connect);
+export function useDAOFactoryContract(address?: string, withSigner?: boolean) {
+  return useContract<DAOFactory>(
+    address ?? ZERO_ADDRESS, 
+    DAOFactory__factory.connect,
+    withSigner
+  );
 }
 
-export function useGovernorContract(address?: string) {
-  return useContract<Governor>(address ?? ZERO_ADDRESS, Governor__factory.connect);
+export function useGovernorContract(address?: string, withSigner?: boolean) {
+  return useContract<Governor>(
+    address ?? ZERO_ADDRESS, 
+    Governor__factory.connect,
+    withSigner
+  );
 }
 
-export function useTimelockContract(address?: string) {
-  return useContract<Timelock>(address ?? ZERO_ADDRESS, Timelock__factory.connect);
+export function useTimelockContract(address?: string, withSigner?: boolean) {
+  return useContract<Timelock>(
+    address ?? ZERO_ADDRESS, 
+    Timelock__factory.connect, 
+    withSigner
+  );
 }
 
-export function useERC20VotesContract(address?: string) {
-  return useContract<ERC20Votes>(address ?? ZERO_ADDRESS, ERC20Votes__factory.connect);
+export function useERC20VotesContract(address?: string, withSigner?: boolean) {
+  return useContract<ERC20Votes>(
+    address ?? ZERO_ADDRESS,
+    ERC20Votes__factory.connect,
+    withSigner
+  );
 }
 
-export function useERC721VotesContract(address?: string) {
-  return useContract<ERC721Votes>(address ?? ZERO_ADDRESS, ERC721Votes__factory.connect);
+export function useERC721VotesContract(address?: string, withSigner?: boolean) {
+  return useContract<ERC721Votes>(
+    address ?? ZERO_ADDRESS, 
+    ERC721Votes__factory.connect,
+    withSigner
+  );
 }
 
-export function useVotesContract(address?: string, standard?: string) {
-  if (standard?.toLowerCase().replace(' ', '') === 'erc20votes') {
-    return useERC20VotesContract(address);
-  } else if (standard?.toLowerCase().replace(' ', '') === 'erc721votes') {
-    return useERC721VotesContract(address);
+export function useVotesContract(address?: string, standard?: number, withSigner?: boolean) {
+  if (standard == 0) {
+    return useERC20VotesContract(address, withSigner);
+  } else if (standard == 1) {
+    return useERC721VotesContract(address, withSigner);
   } else return null;
 }

@@ -10,9 +10,7 @@ import { AppProvider } from './contexts/app-context';
 import { CacheProvider } from './contexts/cache-context';
 import { DAOsProvider } from './contexts/daos-context';
 import { DAOProvider } from './contexts/dao-context';
-import { LockerProvider } from './contexts/locker-context';
-import TokenPriceProvider from './contexts/token-price-context';
-import { VoteProvider } from './contexts/vote-context';
+import { ProposalsProvider } from './contexts/proposals-context';
 import { Web3Provider } from './contexts/web3-context';
 import { CHAIN_IDS } from './contexts/web3-context/chains';
 import { DetailProposalProvider } from 'src/contexts/detail-proposal-context';
@@ -44,15 +42,13 @@ function Root() {
           >
             <DAOsProvider>
               <DAOProvider>
-                <LockerProvider>
-                <VoteProvider>
+                <ProposalsProvider>
                   <DetailProposalProvider>
                     <HighchartsGlobalConfig />
                     <App />
                     <ErrorNotifier />
                   </DetailProposalProvider>
-                </VoteProvider>
-                </LockerProvider>
+                </ProposalsProvider>
               </DAOProvider>
             </DAOsProvider>
           </SnackbarProvider>

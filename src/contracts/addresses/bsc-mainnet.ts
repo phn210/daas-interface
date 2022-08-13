@@ -17,6 +17,7 @@ const addresses: { [name: string]: string } = {
   VOTING_STRATEGY_ADDRESS: '0x64Fd6BB45e60C556de10084a3Af09019EF4c4cd2',
   //
   LOTTERY_ADDRESS: '0xe6D4ce3ea4f2EB640Bc0b6C8f050a9d390E61c72',
+  DAO_FACTORY: '0x2Fa625CDf857F39F9708A00f69eF5fbb483f861D'
 };
 
 export default addresses;

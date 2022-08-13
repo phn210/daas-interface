@@ -1,11 +1,6 @@
 export interface DAO {
   _id: string;
   chainId: string;
-  governor: string;
-  index: number;
-  infoHash: string;
-  isBlacklisted: boolean;
-  isRetired: boolean;
   name: string;
   shortDescription: string;
   description?: string;
@@ -33,24 +28,51 @@ export interface Proposal {
   stateText: string;
 }
 
-export interface GovernorBaseConfig {
+type GTokenConfig = {
+  deployedAddress: string;
+  standard: number;
+  name: string;
+  symbol: string;
+  owner: string;
+  decimals: number;
+  initialSupply: number;
+}
+
+type BaseConfig = {
   minVotingDelay: number;
   maxVotingDelay: number;
   minVotingPeriod: number;
   maxVotingPeriod: number;
-  isWhitelistRequired: boolean;
+  isWhiteListRequired: boolean;
+  defaultExpiration?: number;
 }
 
-export interface GovernorConfig {
+type GovernorConfig = {
   votingDelay: number;
   votingPeriod: number;
   quorumAttendance: number;
   quorumApproval: number;
 }
 
-export interface TimelockConfig {
+type TimelockConfig = {
   minTimelockDelay: number;
   maxTimelockDelay: number;
   delay: number;
   gracePeriod: number;
+}
+
+type IPFS = {
+  name: string;
+  logoUrl: string;
+  websiteUrl: string;
+  shortDescription: string;
+  description: string;
+}
+
+type Initialization = {
+  name: string;
+  symbol: string;
+  owner: string;
+  decimals: number;
+  initialSupply: number;
 }

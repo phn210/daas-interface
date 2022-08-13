@@ -101,7 +101,7 @@ const CHAINS: { [chainId: number]: ExtendedChainInformation } = {
     blockExplorerUrls: ['https://testnet.bscscan.com'],
     nativeCurrency: BNB,
     urls: [
-      'https://data-seed-prebsc-1-s1.binance.org:8545/',
+      'https://nd-006-375-626.p2pify.com/7d7fc1a2b5dd8f7a51697c940dd6fe33',
       // 'https://data-seed-prebsc-2-s1.binance.org:8545/',
       'https://data-seed-prebsc-1-s2.binance.org:8545/',
       'https://data-seed-prebsc-2-s2.binance.org:8545/',
@@ -111,7 +111,7 @@ const CHAINS: { [chainId: number]: ExtendedChainInformation } = {
     isTestnet: true,
   },
   [CHAIN_IDS.LOCALHOST]: {
-    name: 'ETH Mainnet',
+    name: 'Localhost',
     blockExplorerUrls: ['https://etherscan.io'],
     nativeCurrency: ETH,
     urls: [

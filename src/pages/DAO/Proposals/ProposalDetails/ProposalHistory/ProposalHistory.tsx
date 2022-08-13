@@ -19,7 +19,7 @@ export default function ProposalHistory() {
         Proposal History
       </Typography>
       <div className="timeline">
-        {data.statusHistory?.map((status: StatusProposal, index: number) => {
+        {/* {data.statusHistory?.map((status: StatusProposal, index: number) => {
           return (
             <div className="timeline_item" key={'timeline' + index}>
               <div className="timline_item_icon">
@@ -44,7 +44,7 @@ export default function ProposalHistory() {
               </div>
             </div>
           );
-        })}
+        })} */}
 
         {/* <ThreeDotCircleicon style={{ fontSize: '32px' }} /> */}
       </div>

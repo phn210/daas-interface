@@ -1,7 +1,56 @@
+import React, { useState } from 'react';
 import { Grid, Switch, TextField, Typography } from '@mui/material';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { BaseConfig } from 'src/contexts/daos-context/types';
 
-export default function BaseConfigForm() {
+type Props = {
+    value: BaseConfig;
+    onChange: (_config: BaseConfig, _isValid: boolean) => void;
+}
+
+export default function BaseConfigForm(props: Props) {
+    const [isWhitelist, setIsWhitelist] = useState(false);
+
+    const handleSwitch = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        setIsWhitelist(ev.target.checked);
+    }
+
+    const validInputs = (inputs: BaseConfig) => {
+        if (inputs.minVotingDelay > inputs.maxVotingDelay) return false;
+        if (inputs.minVotingPeriod > inputs.maxVotingPeriod) return false;
+        return true;
+    }
+
+    const handleInputsChange = (key: string, value: any) => {
+        const currentValue = props.value;
+        switch (key) {
+            case 'minVotingDelay':
+                currentValue.minVotingDelay = value;
+                break;
+            case 'maxVotingDelay':
+                currentValue.maxVotingDelay = value;
+                break;
+            case 'minVotingPeriod':
+                currentValue.minVotingPeriod = value;
+                break;
+            case 'maxVotingPeriod':
+                currentValue.maxVotingPeriod = value;
+                break;
+            case 'isWhiteListRequired':
+                currentValue.isWhiteListRequired = value;
+                break;
+            case 'defaultExpiration':
+                currentValue.defaultExpiration = value;
+                break;
+            default: break;
+        }
+        props.onChange(currentValue, validInputs(currentValue));
+    }
+
+    const onInputsChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        handleInputsChange(ev.target.name, ev.target.value)
+    }
+
     return (
         <Grid
             container
@@ -31,6 +80,7 @@ export default function BaseConfigForm() {
                             label='Min'
                             fullWidth
                             size='small'
+                            onChange={onInputsChange}
                             InputProps={{
                                 sx: {
                                     bgcolor: 'background.default',
@@ -48,6 +98,7 @@ export default function BaseConfigForm() {
                             label='Max'
                             fullWidth
                             size='small'
+                            onChange={onInputsChange}
                             InputProps={{
                                 sx: {
                                     bgcolor: 'background.default',
@@ -79,6 +130,7 @@ export default function BaseConfigForm() {
                             label='Min'
                             fullWidth
                             size='small'
+                            onChange={onInputsChange}
                             InputProps={{
                                 sx: {
                                     bgcolor: 'background.default',
@@ -96,6 +148,7 @@ export default function BaseConfigForm() {
                             label='Max'
                             fullWidth
                             size='small'
+                            onChange={onInputsChange}
                             InputProps={{
                                 sx: {
                                     bgcolor: 'background.default',
@@ -115,7 +168,7 @@ export default function BaseConfigForm() {
                     <Typography>Whitelist Proposers</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                    <Switch/>
+                    <Switch checked={isWhitelist} onChange={handleSwitch}/>
                 </Grid>
             </Grid>
             <Grid
@@ -131,10 +184,12 @@ export default function BaseConfigForm() {
                     <TextField
                         id='expiration'
                         name='expiration'
-                        label='Number'
+                        label={isWhitelist ? 'Number' : ''}
                         required
                         fullWidth
                         size='small'
+                        disabled={!isWhitelist}
+                        onChange={onInputsChange}
                         InputProps={{
                             sx: {
                                 bgcolor: 'background.default',

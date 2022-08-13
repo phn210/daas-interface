@@ -15,7 +15,7 @@ export default function DAOItem(props: Props) {
                 p: 4,
                 bgcolor: 'background.paper',
                 borderRadius: '12px',
-                height: props.data.description ? '512px' : '300px',
+                height: props.data.description ? '460px' : '300px',
                 // my: 1
             }}
         >
@@ -65,7 +65,7 @@ export default function DAOItem(props: Props) {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item sx={{ height: props.data.description ? '15%' : '52%' }}>
+            <Grid item sx={{ height: props.data.description ? '10%' : '52%' }}>
                 <Typography align='left'>
                     {props.data.shortDescription}
                 </Typography>

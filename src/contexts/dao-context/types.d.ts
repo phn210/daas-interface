@@ -12,3 +12,13 @@ export interface DAO {
   logoUrl: string;
   websiteUrl: string;
 }
+
+export interface Event {
+  _id: string;
+  chainId: string;
+  address: string;
+  contract: string;
+  name: string;
+  blockTimestamp: number;
+  transactionHash: string;
+}

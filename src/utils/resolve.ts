@@ -28,3 +28,23 @@ export function resolveDAOId(daoId: string) {
     }
     return obj;
 }
+
+export function resolveProposal(proposalId: string) {
+    const obj = {
+        chainId: 0,
+        governor: '',
+        id: ''
+    }
+    let i = 0;
+    try {
+        if (proposalId.length != PADDING.CHAINID*2 + PADDING.ADDRESS*2 + PADDING.PROPOSALID*2+2)
+            throw {message: 'Invalid proposalId length'};
+        obj.chainId = Number(utils.hexDataSlice(proposalId, i, i+= PADDING.CHAINID));
+        obj.governor = utils.hexDataSlice(proposalId, i, i+= PADDING.ADDRESS);
+        obj.id = utils.hexDataSlice(proposalId, i, i+= PADDING.PROPOSALID);    
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+    return obj;
+}

@@ -10,7 +10,7 @@ import useNotifier from 'src/hooks/useNotifier';
 type Props = {
   data: 'For' | 'Against';
   open: boolean;
-  idPropsal: string;
+  proposalId: string;
   startBlock: string;
   votingPower: string | number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,15 +24,15 @@ export default function ConfirmModal(props: Props) {
   const [loadingVote, setLoadingVote] = useState(false);
   const { address } = useWeb3Context();
 
-  async function vote(idProposal: string, choice: 1 | 0) {
+  async function vote(proposalId: string, choice: 1 | 0) {
     setLoadingVote(true);
     try {
       if (!address || !governorDelegateContract) {
         throw new Error('Wallet connection error');
       }
-      await (await governorDelegateContract.castVote(idProposal, choice)).wait();
+      await (await governorDelegateContract.castVote(proposalId, choice)).wait();
       notifySuccess('Vote successfully');
-      fetch(props.idPropsal, props.startBlock);
+      fetch(props.proposalId);
     } catch (error) {
       // console.error('Failed to call vote function: ', error);
       notifyError('Vote fail! ' + (error as Error).message);
@@ -44,9 +44,9 @@ export default function ConfirmModal(props: Props) {
   };
   async function onVoteAction() {
     if (props.data == 'For') {
-      await vote(props.idPropsal, 1);
+      await vote(props.proposalId, 1);
     } else {
-      await vote(props.idPropsal, 0);
+      await vote(props.proposalId, 0);
     }
 
     handleClose();

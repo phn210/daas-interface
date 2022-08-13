@@ -8,7 +8,7 @@ import { useAppContext } from 'src/contexts/app-context';
 import { useCacheContext, useCacheData } from 'src/contexts/cache-context';
 import { resolveDAOId } from 'src/utils/resolve';
 import { getIpfsHash } from 'src/utils/ipfs';
-import { DAO } from './types';
+import { DAO, Event } from './types';
 
 interface DAOContextData {
     status: FetchingStatus;
@@ -32,7 +32,8 @@ export function DAOProvider({ children }: BaseContextProps){
     const { push, clear } = useCacheContext();
     const { client, ipfsClient } = useApi();
     const { daoFactoryAddresses } = useAppContext();
-    // const daoFactoryContract = useDAOFactoryContract(undefined);
+    const governorContract = useGovernorContract(undefined);
+    if (!governorContract) throw new Error('Connection error');
 
     const fetchData = async (daoId: string) => {
         try {
@@ -48,8 +49,7 @@ export function DAOProvider({ children }: BaseContextProps){
             })]))[0]
             const ipfsHash = getIpfsHash(dao.infoHash);
 
-            const governorContract = useGovernorContract(dao.governor);
-            if (!governorContract) throw new Error('Connection error');
+            
 
             const [daoInfo, daoContracts, daoEvents, ] = await Promise.all([
                 ipfsClient.get(ipfsHash??'QmZskAJu484DK9zCCekrLPdPRBAAUEQtRvVRiHsGvUXzqd').then(res => res.data as any),
@@ -62,9 +62,9 @@ export function DAOProvider({ children }: BaseContextProps){
 
             push('dao.dao', dao);
             push('dao.contracts', daoContracts);
-            push('dao.events', daoEvents);
-            console.log(daoContracts);
-            console.log(daoEvents);
+            push('dao.events', daoEvents as Event[]);
+            // console.log(daoContracts);
+            // console.log(daoEvents);
             // console.log(admins);
             setStatus(FetchingStatus.SUCCESS);
             setError(undefined);

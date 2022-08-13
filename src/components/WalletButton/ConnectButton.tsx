@@ -74,23 +74,6 @@ export default function ConnectButton(props: ButtonProps) {
               <ListItemText>WalletConnect</ListItemText>
             </ListItem>
           </List>
-
-          <Box>
-            <Typography align="center" variant="body3" color="text.secondary">
-              By connecting, I accept Trava's <br />{' '}
-              <Link href="https://trava.finance/terms-of-service" target="_blank" rel="noreferrer noopener">
-                Terms of Service
-              </Link>
-              ,{' '}
-              <Link href="https://trava.finance/privacy-policy" target="_blank" rel="noreferrer noopener">
-                Privacy Policy
-              </Link>
-              , and{' '}
-              <Link href="https://trava.finance/cookies-policy" target="_blank" rel="noreferrer noopener">
-                Cookies Policy
-              </Link>
-            </Typography>
-          </Box>
         </DialogContent>
       </Dialog>
     </Fragment>

@@ -8,17 +8,17 @@ import { NavLink, useParams } from 'react-router-dom';
 import FetchData from './FetchData';
 
 type ParamsUrl = {
-  idProposal: string;
+  proposalId: string;
 };
 
 export default function ProposalDetails() {
   const params: ParamsUrl = useParams();
 
   // const [idProposal, startBlock] = params.idProposal.split('&');
-  const [idProposal, startBlock] = ['', '0'];
+  const [proposalId, startBlock] = ['', '0'];
   return (
     <>
-      <FetchData idProposal={idProposal} startBlock={startBlock} />
+      <FetchData proposalId={proposalId} />
       <Box sx={{ maxWidth: { xs: '541px', sm: '680px', lg: 'unset' }, margin: '0 auto' }}>
         <Box>
           <NavLink to={'../proposals'} style={{ textDecoration: 'none' }}>
@@ -36,11 +36,9 @@ export default function ProposalDetails() {
             <ProposalInfor />
           </Grid>
           <Grid item xs={12} lg={4}>
-            <YourInfor idProposal={idProposal} startBlock={startBlock} />
+            <YourInfor proposalId={proposalId} startBlock={startBlock} />
             <br />
             <VotingResult />
-            <br />
-            <ProposalHistory />
           </Grid>
         </Grid>
       </Box>

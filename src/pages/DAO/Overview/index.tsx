@@ -2,7 +2,6 @@ import { useMemo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Avatar, Box, Button, Chip, Grid, IconButton, Link, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { useApi } from 'src/hooks/useApi';
 import { useDAOContext } from 'src/contexts/dao-context';
 import { useWeb3Context } from 'src/contexts/web3-context';
 import { CHAINS } from 'src/contexts/web3-context/chains';
@@ -13,7 +12,6 @@ import Empty from 'src/components/Empty';
 import { getErrorMessage } from 'src/utils';
 import { formatAddress, formatNumber } from 'src/utils/format';
 import EventsList from './EventsList';
-import DAOVotingPower from 'src/pages/Dashboard/DAOVotingPower';
 
 type ParamsUrl = {
     daoId: string;
@@ -26,19 +24,7 @@ export default function Overview() {
 
     useEffect(() => {
         fetch(params.daoId);
-    }, [address, chain])
-
-    const mockData = {
-        daoId: params.daoId,
-        chainId: '4',
-        index: '0',
-        name: 'DAO Name 1',
-        network: 'Ethereum',
-        shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
-        logoUrl: 'https://d33wubrfki0l68.cloudfront.net/fcd4ecd90386aeb50a235ddc4f0063cfbb8a7b66/4295e/static/bfc04ac72981166c740b189463e1f74c/40129/eth-diamond-black-white.jpg',
-        websiteUrl: 'https://google.com',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id ex varius, pellentesque ante sagittis, dapibus felis. Fusce vulputate neque a mattis congue. Aenean turpis turpis, faucibus a sagittis pharetra, maximus at libero. Fusce venenatis semper turpis, sed sollicitudin felis condimentum sit amet. Pellentesque ut libero magna. Pellentesque lacinia iaculis ex, et lacinia justo facilisis sed. Ut eros ligula, rutrum eu fermentum eu, tempus ac velit. Proin elit sem, efficitur eu sagittis vitae, varius non elit. Praesent tincidunt consequat nisi vitae auctor. Vivamus sollicitudin eu odio vel hendrerit. Proin in vulputate enim. Pellentesque interdum arcu id neque vestibulum, quis semper est tincidunt.\nMaecenas consequat eros sed nunc dapibus, quis hendrerit arcu pharetra. Duis rhoncus sit amet ex ut molestie. Mauris et risus quis nisl semper pellentesque nec sit amet elit. Vestibulum sagittis eu erat nec tristique. Praesent auctor tincidunt eros, tempor commodo orci porttitor eu. Nam dictum massa vitae venenatis luctus. In sapien eros, dapibus et malesuada at, sagittis eu turpis. Maecenas vel faucibus velit, ut feugiat neque. Etiam lobortis at enim ut auctor. Praesent a eros vitae dui suscipit rhoncus. Donec nec tortor nisl. Vivamus quis ex ut tortor pretium mollis. Fusce nec est quis sem condimentum faucibus sit amet a mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'
-    }
+    }, [address, chain, params])
 
     return (
         <Box p={3}>
@@ -47,7 +33,7 @@ export default function Overview() {
                 rowSpacing={2}
                 justifyContent='center'
             >
-                {(status === FetchingStatus.IDLE || status === FetchingStatus.FETCHING || activating) && (
+                {(status === FetchingStatus.IDLE || status === FetchingStatus.FETCHING || status === FetchingStatus.UPDATING || activating) && (
                 <Box textAlign={'center'} py={4}>
                     <Loading size={50} />
                     <Typography color="text.secondary">Please wait a moment...</Typography>
@@ -115,29 +101,55 @@ export default function Overview() {
                             </Grid>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography color='text.primary' variant='h5'>
+                            <Typography component='span' color='text.primary' variant='h5'>
                                 Website:&nbsp;
-                                <Link 
-                                    href={data.dao.websiteUrl} 
-                                    target='_blank' 
-                                    underline='none'
-                                    sx={{ fontStyle: 'italic' }}
-                                >
-                                    {data.dao.websiteUrl}
-                                </Link>
+                                
                             </Typography>
+                            <Link 
+                                href={data.dao.websiteUrl} 
+                                target='_blank' 
+                                underline='none'
+                                sx={{ fontStyle: 'italic' }}
+                            >
+                                <Typography component='span' variant='h6'>{data.dao.websiteUrl}</Typography>
+                            </Link>
                         </Grid>
                         <Grid
                             item xs={12}
                             container
                             spacing={2}
                         >
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12} lg={4}
+                            >
+                                <Typography color='text.primary' variant='h5'>
+                                    Description
+                                </Typography>
+                                <Box
+                                    minHeight='192px'
+                                    sx={{ 
+                                        mt: 2,
+                                        p: 4,
+                                        bgcolor: 'background.paper',
+                                        borderRadius: '12px'
+                                    }}
+                                >
+                                    <Typography
+                                        color='text.primary'
+                                        variant='body2'
+                                        align='justify'
+                                        lineHeight={1.8}
+
+                                    >
+                                        {data.dao.description}
+                                    </Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item xs={12} lg={4}>
                                 <Typography color='text.primary' variant='h5'>
                                 Contracts
                                 </Typography>
                                 <Box
-                                    minHeight='200px'
+                                    minHeight='192px'
                                     sx={{ 
                                         mt: 2,
                                         p: 1,
@@ -202,21 +214,20 @@ export default function Overview() {
                                     </List>
                                 </Box>
                             </Grid>
-                            <Grid 
-                                item xs={12} md={6}
+                            <Grid item xs={12} lg={4}
                                 container spacing={2}
                                 alignItems='flex-start'
                                 justifyContent='center'
                             >
-                                <Grid item xs={6}>
+                                <Grid item xs={12}>
                                     <Typography color='text.primary' variant='h5'>
                                     Status
                                     </Typography>
                                     <Box
-                                        minHeight='85px'
+                                        // minHeight='85px'
                                         sx={{ 
                                             mt: 2,
-                                            p: 4,
+                                            p: 3,
                                             bgcolor: 'background.paper',
                                             borderRadius: '12px'
                                         }}
@@ -229,15 +240,15 @@ export default function Overview() {
                                         </Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12}>
                                     <Typography color='text.primary' variant='h5'>
                                     Reputation
                                     </Typography>
                                     <Box
-                                        minHeight='85px'
+                                        // minHeight='85px'
                                         sx={{ 
                                             mt: 2,
-                                            p: 4,
+                                            p: 3,
                                             bgcolor: 'background.paper',
                                             borderRadius: '12px'
                                         }}
@@ -250,7 +261,7 @@ export default function Overview() {
                                         </Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12}>
+                                {/* <Grid item xs={12}>
                                     <Typography color='text.primary' variant='h5'>
                                     Admins
                                     </Typography>
@@ -270,34 +281,10 @@ export default function Overview() {
                                             {(data.dao.isRetired ? 'Retired' : 'Active')}
                                         </Typography>
                                     </Box>
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                         </Grid>
-                        <Grid
-                            item xs={12}
-                        >
-                            <Typography color='text.primary' variant='h5'>
-                                Description
-                            </Typography>
-                            <Box
-                                sx={{ 
-                                    mt: 2,
-                                    p: 4,
-                                    bgcolor: 'background.paper',
-                                    borderRadius: '12px'
-                                }}
-                            >
-                                <Typography
-                                    color='text.primary'
-                                    variant='body2'
-                                    align='justify'
-                                    lineHeight={1.8}
 
-                                >
-                                    {data.dao.description}
-                                </Typography>
-                            </Box>
-                        </Grid>
                         <Grid
                             item xs={12}
                         >
@@ -312,7 +299,7 @@ export default function Overview() {
                                     borderRadius: '12px'
                                 }}
                             >
-                                <EventsList/>
+                                <EventsList events={data.events}/>
                             </Box>
                         </Grid>
                     </>

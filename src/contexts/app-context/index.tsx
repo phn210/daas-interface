@@ -64,16 +64,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
   Object.keys(CHAIN_IDS).map(key => {
     switch (key) {
       case 'BSC_MAINNET':
-        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.BSC_MAINNET]: addressesConfig.BSC_MAINNET});
+        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.BSC_MAINNET]: addressesConfig.BSC_MAINNET.DAO_FACTORY});
         break;
       case 'BSC_TESTNET':
-        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.BSC_TESTNET]: addressesConfig.BSC_TESTNET});
+        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.BSC_TESTNET]: addressesConfig.BSC_TESTNET.DAO_FACTORY});
         break;
       case 'RINKEBY':
-        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.RINKEBY]: addressesConfig.RINKEBY});
+        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.RINKEBY]: addressesConfig.RINKEBY.DAO_FACTORY});
         break;
       case 'LOCALHOST':
-        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.LOCALHOST]: addressesConfig.LOCALHOST});
+        Object.assign(daoFactoryAddresses, {[CHAIN_IDS.LOCALHOST]: addressesConfig.LOCALHOST.DAO_FACTORY});
         break;
       default:
         break;

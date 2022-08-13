@@ -1,13 +1,21 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { Box, Button, Grid, Tab, Tabs, TextField, Typography } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
+import { useAppContext } from 'src/contexts/app-context';
+import { useDAOContext } from 'src/contexts/dao-context';
+import { useWeb3Context } from 'src/contexts/web3-context';
+import { FetchingStatus } from 'src/constants';
+import { formatAddress } from 'src/utils/format';
+import { resolveDAOId } from 'src/utils/resolve';
 import Empty from 'src/components/Empty';
 import FunctionList from './FunctionList';
-import { borderRadius } from '@mui/system';
 
 type ParamsUrl = {
     daoId: string;
 }
+
+type ContractAddress = {[name: string]: string[] | string};
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -35,40 +43,39 @@ function TabPanel(props: TabPanelProps) {
 }
 
 export default function Contracts() {
+    const { activating, address, chain } = useWeb3Context();
+    const params: ParamsUrl = useParams();
+    const { status, data, error, fetch } = useDAOContext();
     const [value, setValue] = useState(0);
+    const { daoFactoryAddresses } = useAppContext();
+
+    useEffect(() => {
+        fetch(params.daoId);
+    }, [address, chain])
+    
 
     const handleChange = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
-    const params: ParamsUrl = useParams();
-    const daoContractsAddresses = {
-        daofactory: '0x0000000000000000000000000000000000000000',
-        governor: '0x0000000000000000000000000000000000000000',
-        timelocks: [
-            '0x0000000000000000000000000000000000000000',
-            '0x0000000000000000000000000000000000000000'
-        ],
-        votes: '0x0000000000000000000000000000000000000000',
-        standard: 'erc20votes'
-    };
+    const resolvedId = resolveDAOId(params.daoId);
+
+    const daoContractsAddresses: ContractAddress = {};
+
+    Object.assign(daoContractsAddresses, {['daoFactory']: daoFactoryAddresses[Number(resolvedId.chainId)]})
+    Object.assign(daoContractsAddresses, data.contracts)
 
     return (
+        <>
         <Box p={3}>
-            <Box mb={3}>
-                <RouterLink
-                    to={`/${params.daoId}`}
-                    style={{
-                        textDecoration: 'none'
-                    }}
-                >
-                    <Button variant='contained'>Back</Button>
-                </RouterLink>
-            </Box>
             <Box mb={3}>
                 <Typography component='span' variant='h3' >Contracts</Typography>
             </Box>
-            {('daofactory' in daoContractsAddresses) ? 
+            {('daoFactory' in daoContractsAddresses 
+            && address !== undefined
+            && [
+                '0x1ad841ea7a95c2fd3bba0812e538e9061a9f743b'.toLowerCase(),
+            ].includes(address.toLowerCase())) ? 
             (<Box 
                 mb={3}
                 px={2}
@@ -94,52 +101,58 @@ export default function Contracts() {
                         }
                     }}
                 >
+                    
                     {Object.keys(daoContractsAddresses).map((name: string, index: number) => {
                         switch(name) {
-                            case 'daofactory':
+                            case 'daoFactory':
                                 return <Tab label='DAO Factory' key={`contract-${name}`} />
                             case 'governor':
                                 return <Tab label='Governor' key={`contract-${name}`} />
                             case 'timelocks':
-                                return daoContractsAddresses.timelocks.map((e, i) => {
+                                return Array(daoContractsAddresses['timelocks']).map((e, i) => {
                                     return <Tab label={`Timelock ${i}`} key={`contract-${name+i}`} />
                                 })
                             case 'votes':
-                                return <Tab label={daoContractsAddresses.standard.replace('erc', 'ERC').replace('v', 'V')} key={`contract-${daoContractsAddresses.standard}`} />
+                                return <Tab label={String(daoContractsAddresses.standard).replace('erc', 'ERC').replace('v', 'V')} key={`contract-${String(daoContractsAddresses.standard)}`} />
                         }    
                     })}
                 </Tabs>
+                <Box px={1} mt={2}>
+                    <Typography component='span' variant='h5' >Address: {formatAddress(Object.values(daoContractsAddresses).flat()[value])}</Typography> <LaunchIcon/>
+                </Box>
                 {Object.keys(daoContractsAddresses).map((name: string, index: number) => {
                     switch(name) {
-                        case 'daofactory':
+                        case 'daoFactory':
                             return (
                                 <TabPanel value={value} index={index} name={name} key={`panel-${name}`}>
-                                    <FunctionList name={name} address={daoContractsAddresses[name]} />
+                                    <FunctionList name={name} address={String(daoContractsAddresses[name])} />
                                 </TabPanel>
                             )
                         case 'governor':
                             return (
                                 <TabPanel value={value} index={index} name={name} key={`panel-${name}`}>
-                                    <FunctionList name={name} address={daoContractsAddresses[name]} />
+                                    <FunctionList name={name} address={String(daoContractsAddresses[name])} />
                                 </TabPanel>
                             )
                         case 'timelocks':
-                            return daoContractsAddresses.timelocks.map((e, i) => {
+                            return Array(daoContractsAddresses.timelocks).map((e, i) => {
                                 return (
                                     <TabPanel value={value} index={index+i} name={name+i} key={`panel-${name+i}`}>
-                                        <FunctionList name={name} address={daoContractsAddresses[name][i]} />
+                                        <FunctionList name={name} address={String(daoContractsAddresses[name][i])} />
                                     </TabPanel>
                                 )
                             })
                         case 'votes':
                             return (
                                 <TabPanel value={value} index={index + daoContractsAddresses.timelocks.length - 1} name={name} key={`panel-${daoContractsAddresses.standard}`}>
-                                    <FunctionList name={daoContractsAddresses.standard} address={daoContractsAddresses[name]} />
+                                    <FunctionList name={String(daoContractsAddresses.standard)} address={String(daoContractsAddresses[name])} />
                                 </TabPanel>
                             )
                     }
                 })}
             </Box>) : <Empty py={4} />}
         </Box>
+        </>
+        
     );
 }

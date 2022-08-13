@@ -16,13 +16,6 @@ export interface RouteConfig {
 
 export default [
   {
-    path: '/styles',
-    exact: true,
-    component: React.lazy(() => import('../pages/Document')),
-    layout: LayoutOptions.BLANK,
-    disableInProduction: true,
-  },
-  {
     path: '/',
     exact: true,
     redirect: true,

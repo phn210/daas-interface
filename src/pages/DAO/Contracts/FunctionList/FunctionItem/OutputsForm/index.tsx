@@ -1,8 +1,10 @@
 import { ParamType } from 'ethers/lib/utils';
 import {  Grid, TextField, Typography } from '@mui/material';
+import CopyButton from 'src/components/CopyButton';
 
 type Props = {
     outputs: ParamType[];
+    value: any[];
 }
 
 export default function OutputsForm(props: Props) {
@@ -19,24 +21,31 @@ export default function OutputsForm(props: Props) {
                             item xs={12}
                             container spacing={1} alignItems='center'
                         >
-                            <Grid item xs={5}>
+                            <Grid item xs={4}>
                                 <Typography>{e.name?.replace('_', '')}</Typography>
                             </Grid>
                             <Grid item xs={7}>
                                 <TextField
                                     id={`${e.name}-outputs-${i}`}
                                     name={`${e.name}-outputs-${i}`}
-                                    label={e.type}
+                                    label={props.value[i] == '' ? e.type : ''}
                                     required
-                                    fullWidth
                                     size='small'
+                                    fullWidth
                                     disabled
+                                    value={props.value[i]}
                                     InputProps={{
                                         sx: {
                                             bgcolor: 'background.default',
+                                            color: 'primary'
                                         }
                                     }}
-                                />    
+                                />
+                            </Grid>
+                            <Grid item xs={1}>
+                                <CopyButton
+                                    text={`${props.value[i]}` ?? ''}
+                                />
                             </Grid>
                         </Grid>
                     );

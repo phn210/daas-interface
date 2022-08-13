@@ -18,7 +18,7 @@ type ModalProps = {
 };
 
 type YourInfoProps = {
-  idProposal: string;
+  proposalId: string;
   startBlock: string;
 };
 
@@ -54,7 +54,7 @@ export default function YourInfor(props: YourInfoProps) {
                 variant="contained"
                 color="primary"
                 sx={{ px: 3 }}
-                onClick={() => fetch(props.idProposal, props.startBlock)}
+                onClick={() => fetch(props.proposalId)}
               >
                 Reload
               </Button>
@@ -139,7 +139,7 @@ export default function YourInfor(props: YourInfoProps) {
                 data={modal.data}
                 startBlock={props.startBlock}
                 votingPower={data.userInfor?.votingPower}
-                idPropsal={props.idProposal}
+                proposalId={props.proposalId}
                 closeModal={() => {
                   setModal((prev) => {
                     return { ...prev, open: false };

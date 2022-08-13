@@ -3,8 +3,7 @@ import { useDetailProposalContext } from 'src/contexts/detail-proposal-context';
 import { useWeb3Context } from 'src/contexts/web3-context';
 
 type Props = {
-  idProposal: string;
-  startBlock: string;
+  proposalId: string;
 };
 
 export default function FetchData(props: Props) {
@@ -12,7 +11,7 @@ export default function FetchData(props: Props) {
   const { address, chain } = useWeb3Context();
 
   useEffect(() => {
-    fetch(props.idProposal, props.startBlock);
+    fetch(props.proposalId);
   }, [address, chain]);
   return <div />;
 }

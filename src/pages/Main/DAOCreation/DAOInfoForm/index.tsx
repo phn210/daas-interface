@@ -1,6 +1,39 @@
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { IPFS } from 'src/contexts/daos-context/types';
 
-export default function DAOInfoForm() {
+type Props = {
+    value: IPFS;
+    onChange: (_form: IPFS, _isValid: boolean) => void;
+}
+
+export default function DAOInfoForm(props: Props) {
+    const handleInputsChange = (key: string, value: any) => {
+        const currentValue = props.value;
+        switch (key) {
+            case 'name':
+                currentValue.name = value;
+                break;
+            case 'logoUrl':
+                currentValue.logoUrl = value;
+                break;
+            case 'websiteUrl':
+                currentValue.websiteUrl = value;
+                break;
+            case 'shortDescription':
+                currentValue.shortDescription = value;
+                break;
+            case 'description':
+                currentValue.description = value;
+                break;
+            default: break;
+        }
+        props.onChange(currentValue, true);
+    }
+
+    const onInputsChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        handleInputsChange(ev.target.name, ev.target.value)
+    }
+
     return (
         <>
             <Grid container spacing={2} justifyContent='center'>
@@ -14,6 +47,7 @@ export default function DAOInfoForm() {
                         name='name'
                         fullWidth
                         size='small'
+                        onChange={onInputsChange}
                         InputProps={{
                             sx: {
                                 bgcolor: 'background.default',
@@ -33,6 +67,7 @@ export default function DAOInfoForm() {
                         name='logoUrl'
                         fullWidth
                         size='small'
+                        onChange={onInputsChange}
                         InputProps={{
                             sx: {
                                 bgcolor: 'background.default',
@@ -52,6 +87,7 @@ export default function DAOInfoForm() {
                         name='websiteUrl'
                         fullWidth
                         size='small'
+                        onChange={onInputsChange}
                         InputProps={{
                             sx: {
                                 bgcolor: 'background.default',
@@ -71,6 +107,7 @@ export default function DAOInfoForm() {
                         name='shortDescription'
                         fullWidth
                         size='small'
+                        onChange={onInputsChange}
                         multiline
                         rows={3}
                         InputProps={{
@@ -92,6 +129,7 @@ export default function DAOInfoForm() {
                         name='description'
                         fullWidth
                         size='small'
+                        onChange={onInputsChange}
                         multiline
                         rows={6}
                         InputProps={{
@@ -101,9 +139,6 @@ export default function DAOInfoForm() {
                         }}
                     />
                 </Grid>
-            </Grid>
-            <Grid container justifyContent='flex-end' mt={2}>
-                <Button variant='contained' size='large' sx={{ bgcolor: 'secodary.main' }}>Upload</Button>
             </Grid>
         </>
     );

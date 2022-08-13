@@ -1,13 +1,45 @@
 import { Grid, TextField, Typography } from '@mui/material';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { TimelockConfig } from 'src/contexts/daos-context/types';
 
-export default function TimelockForm() {
+type Props = {
+    value: TimelockConfig;
+    onChange: (_config: TimelockConfig) => void;
+    display: string
+}
+
+export default function TimelockForm(props: Props) {
+    const handleInputsChange = (key: string, value: any) => {
+        const currentValue = props.value;
+        switch (key) {
+            case 'minTimelockDelay':
+                currentValue.minTimelockDelay = value;
+                break;
+            case 'maxTimelockDelay':
+                currentValue.maxTimelockDelay = value;
+                break;
+            case 'delay':
+                currentValue.delay = value;
+                break;
+            case 'gracePeriod':
+                currentValue.gracePeriod = value;
+                break;
+            default: break;
+        }
+        props.onChange(currentValue);
+    }
+
+    const onInputsChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+        handleInputsChange(ev.target.name, ev.target.value)
+    }
+
     return (
         <Grid
             container
             columnSpacing={4}
             rowSpacing={1}
             alignItems='center'
+            display={props.display}
         >
             <Grid
                 item xs={12}
@@ -31,6 +63,7 @@ export default function TimelockForm() {
                             label='Min'
                             fullWidth
                             size='small'
+                            onChange={onInputsChange}
                             InputProps={{
                                 sx: {
                                     bgcolor: 'background.default',
@@ -48,6 +81,7 @@ export default function TimelockForm() {
                             label='Max'
                             fullWidth
                             size='small'
+                            onChange={onInputsChange}
                             InputProps={{
                                 sx: {
                                     bgcolor: 'background.default',
@@ -74,6 +108,7 @@ export default function TimelockForm() {
                         required
                         fullWidth
                         size='small'
+                        onChange={onInputsChange}
                         InputProps={{
                             sx: {
                                 bgcolor: 'background.default',
@@ -99,6 +134,7 @@ export default function TimelockForm() {
                         required
                         fullWidth
                         size='small'
+                        onChange={onInputsChange}
                         InputProps={{
                             sx: {
                                 bgcolor: 'background.default',
@@ -111,7 +147,6 @@ export default function TimelockForm() {
                 <Typography
                     sx={{
                         color:'info.main',
-                        // fontStyle: 'italic'
                     }}
                 >
                     The zero timelock will be master of others timelock contracts.
