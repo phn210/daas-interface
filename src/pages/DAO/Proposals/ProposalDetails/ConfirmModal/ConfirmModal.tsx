@@ -4,7 +4,6 @@ import Moment from 'react-moment';
 import BootstrapButton from 'src/components/primitives/BootstrapButton';
 import { useDetailProposalContext } from 'src/contexts/detail-proposal-context';
 import { useWeb3Context } from 'src/contexts/web3-context';
-import { useGovernorDelegateContract } from 'src/hooks/useContract';
 import useNotifier from 'src/hooks/useNotifier';
 
 type Props = {
@@ -20,18 +19,18 @@ type Props = {
 export default function ConfirmModal(props: Props) {
   const { notifyError, notifySuccess } = useNotifier();
   const { fetch } = useDetailProposalContext();
-  const governorDelegateContract = useGovernorDelegateContract(true);
+  // const governorDelegateContract = useGovernorDelegateContract(true);
   const [loadingVote, setLoadingVote] = useState(false);
   const { address } = useWeb3Context();
 
   async function vote(proposalId: string, choice: 1 | 0) {
     setLoadingVote(true);
     try {
-      if (!address || !governorDelegateContract) {
-        throw new Error('Wallet connection error');
-      }
-      await (await governorDelegateContract.castVote(proposalId, choice)).wait();
-      notifySuccess('Vote successfully');
+      // if (!address || !governorDelegateContract) {
+      //   throw new Error('Wallet connection error');
+      // }
+      // await (await governorDelegateContract.castVote(proposalId, choice)).wait();
+      // notifySuccess('Vote successfully');
       fetch(props.proposalId);
     } catch (error) {
       // console.error('Failed to call vote function: ', error);

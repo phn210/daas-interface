@@ -8,7 +8,7 @@ import Root from './Root';
 const container = document.getElementById('app')!;
 const root = createRoot(container);
 root.render(
-  <BrowserRouter basename="/daas">
+  <BrowserRouter basename="/">
     <StrictMode>
       <Root />
     </StrictMode>
