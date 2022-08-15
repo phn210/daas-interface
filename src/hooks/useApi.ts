@@ -6,7 +6,7 @@ export function useApi() {
   const { chain } = useWeb3Context();
 
   return useMemo(() => {
-    const baseURL = 'http://localhost:5000/api';
+    const baseURL = process.env.REACT_APP_API || 'http://localhost:5000/api';
     const ipfsURL = 'https://daas.infura-ipfs.io/ipfs';
     const ipfsUploadURL = 'https://ipfs.infura.io:5001/api/v0'
     return {
