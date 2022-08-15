@@ -5,9 +5,6 @@ export interface ProposalContent {
   description: string;
   discussions: string;
   shortDescription: string;
-  preview: string;
-  salt: string;
-  created: string;
   ipfsCid: string;
 }
 
@@ -35,7 +32,7 @@ export interface VotingResultDetail {
   abstainVotes: number | string;
   abstainVotesPercentage: number | string;
   status: number | string;
-  quorum: string;
+  quorum?: string;
   currentVotes: string;
   totalVotingPower: string;
   totalVote: string;

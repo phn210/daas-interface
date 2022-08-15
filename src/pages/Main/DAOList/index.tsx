@@ -41,20 +41,22 @@ export default function DAOList(props: DAOListProps) {
             container
             spacing={3}
             justifyContent={{xs: 'center', md: 'start'}}
-            alignItems="stretch"
+            alignItems="center"
         >
             {(status === FetchingStatus.IDLE || status === FetchingStatus.FETCHING || activating) && (
-                <Box textAlign={'center'} py={4}>
+                <Grid item xs={12} sm={8}>
                     <Loading size={50} />
                     <Typography color="text.secondary">Please wait a moment...</Typography>
-                </Box>
+                </Grid>
             )}
             {status === FetchingStatus.FAILED && (
-                <Failed title="Failed to fetch data" detail={getErrorMessage(error)}>
-                    <Button variant="contained" color="primary" sx={{ px: 3 }} onClick={() => fetch()}>
-                    Reload
-                    </Button>
-                </Failed>
+                <Grid item xs={12} sm={8}>
+                    <Failed title="Failed to fetch data" detail={getErrorMessage(error)}>
+                        <Button variant="contained" color="primary" sx={{ px: 3 }} onClick={() => fetch()}>
+                        Reload
+                        </Button>
+                    </Failed>
+                </Grid>
             )}
             {(status === FetchingStatus.SUCCESS || status === FetchingStatus.UPDATING) && !activating && (
                 <>

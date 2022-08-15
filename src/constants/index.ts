@@ -25,5 +25,6 @@ export const SYMBOLS: { [symbol: string]: string } = {
 
 export const FACTORY_CONFIG = {
   MAX_GOVERNOR_CONFIG: 3,
-  MAX_TIMELOCK_CONFIG: 3
+  MAX_TIMELOCK_CONFIG: 3,
+  MAX_PROPOSAL: 11
 }

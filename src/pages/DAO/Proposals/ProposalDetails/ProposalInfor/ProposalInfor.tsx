@@ -21,7 +21,7 @@ export default function ProposalInfor() {
     window.open(data.proposalContent?.discussions || '', '_blank');
   }
   function download() {
-    window.open('https://ipfs.infura-ipfs.io/ipfs/' + data.proposalContent?.ipfsCid || '', '_blank');
+    window.open('https://daas.infura-ipfs.io/ipfs/' + data.proposalContent?.ipfsCid || '', '_blank');
   }
   return (
     <Box sx={{ bgcolor: 'background.paper', p: 2, borderRadius: '12px' }}>

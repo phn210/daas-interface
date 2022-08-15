@@ -22,6 +22,13 @@ export interface Proposal {
   stateText?: string;
 }
 
+export interface Action {
+  target: string;
+  value: number;
+  signature: string;
+  data: string;
+}
+
 export interface Author {
   name: string;
   handle?: string;
@@ -30,8 +37,8 @@ export interface Author {
 export interface IPFS {
   title: string;
   authors: Author[];
-  organiztion?: string[];
-  discussionUrl: string;
+  organization?: string;
+  discussions: string;
   shortDescription: string;
   description: string;
 }

@@ -168,8 +168,10 @@ export function DetailProposalProvider({ children }: BaseContextProps) {
 			const proposal = (await client.get('/proposals/details/' + proposalId)).data.data;
 			const ipfsHash = getIpfsHash(proposal.descriptionHash);
 			
+			
 			const proposalDescription = (await ipfsClient.get(ipfsHash??'QmSLn7MTFjAtPHyZeQ83XKwwB4HGxbF3n82vRefqCz4LDC')).data;
 			Object.assign(proposal, proposalDescription);
+			console.log(proposal);
 
 			const contentData: ProposalContent = {
 				...proposal,

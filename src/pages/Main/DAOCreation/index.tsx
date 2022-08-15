@@ -194,7 +194,7 @@ export default function DAOCreation() {
             infoHash: getDescriptionHash(ipfsHash)
         }
         const res = await createDAO(newDAO);
-        history.push('/');
+        // history.push('/');
     }
 
     return (
@@ -379,11 +379,7 @@ export default function DAOCreation() {
                                     sx: {
                                         ml: 2,
                                         height: '25px'
-                                    },
-                                    endAdornment: 
-                                    <InputAdornment position='end'>
-                                        
-                                    </InputAdornment>,
+                                    }
                                 }}
                             />
                             <IconButton size='small' href={`https://daas.infura-ipfs.io/ipfs/${uploadedIpfsHash}`} target="_blank">
