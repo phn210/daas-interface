@@ -14,20 +14,19 @@ import Moment from 'react-moment';
 
 type ModalProps = {
   open: boolean;
-  data: 'For' | 'Against';
+  data: 'For' | 'Against' | 'Abstain';
 };
 
-type YourInfoProps = {
+type Props = {
   proposalId: string;
-  startBlock: string;
 };
 
-export default function YourInfor(props: YourInfoProps) {
+export default function YourInfor(props: Props) {
   const { address, activating } = useWeb3Context();
   const [modal, setModal] = useState<ModalProps>({ open: false, data: 'For' });
   const { data, statusCallContract, error, fetch } = useDetailProposalContext();
 
-  function openConfirmModal(choice: 'For' | 'Against') {
+  function openConfirmModal(choice: 'For' | 'Against' | 'Abstain') {
     setModal((prev) => {
       return { ...prev, open: true, data: choice };
     });
@@ -102,8 +101,8 @@ export default function YourInfor(props: YourInfoProps) {
                       {compactNumber(Number(data.userInfor?.weight || 0), 2)}%
                     </Typography>
                   </Box>
-                  <Grid container spacing={2} style={{ marginTop: '0px' }}>
-                    <Grid item xs={6}>
+                  <Grid container spacing={1} style={{ marginTop: '0px' }}>
+                    <Grid item xs={4}>
                       <Button
                         disabled={Number(data.votingResult?.status) != 1 || Number(data.userInfor?.votingPower) == 0}
                         variant="contained"
@@ -113,7 +112,7 @@ export default function YourInfor(props: YourInfoProps) {
                         For
                       </Button>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={4}>
                       <Button
                         disabled={Number(data.votingResult?.status) != 1 || Number(data.userInfor?.votingPower) == 0}
                         variant="contained"
@@ -123,21 +122,31 @@ export default function YourInfor(props: YourInfoProps) {
                         Against
                       </Button>
                     </Grid>
+                    <Grid item xs={4}>
+                      <Button
+                        disabled={Number(data.votingResult?.status) != 1 || Number(data.userInfor?.votingPower) == 0}
+                        variant="contained"
+                        sx={{ width: '100%', bgcolor: '#AAAAAA', ':hover': { bgcolor: '#888888' } }}
+                        onClick={() => openConfirmModal('Abstain')}
+                      >
+                        Abstain
+                      </Button>
+                    </Grid>
                   </Grid>
                 </>
               )}
 
-              <Typography
+              {/* <Typography
                 color="text.secondary"
                 sx={{ mt: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
                 <i>How to increase voting power?</i>
                 <HelpOutlineRounded sx={{ marginLeft: 1 }} />
-              </Typography>
+              </Typography> */}
               <ConfirmModal
                 open={modal.open}
                 data={modal.data}
-                startBlock={props.startBlock}
+                startBlock={data.startBlock}
                 votingPower={data.userInfor?.votingPower}
                 proposalId={props.proposalId}
                 closeModal={() => {

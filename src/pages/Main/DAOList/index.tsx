@@ -62,7 +62,7 @@ export default function DAOList(props: DAOListProps) {
                     {list.map((item, index: number) => {
                         return (
                             <Grid 
-                                item xs={10} md={6} xl={4}
+                                item xs={12} sm={8} md={6} xl={4}
                                 key={'dao' + item['_id'] + '' + index}
                             >
                                 <RouterLink 

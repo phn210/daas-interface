@@ -113,14 +113,14 @@ export default function VotingResult() {
               <span>{compactNumber(Math.round(Number(data.votingResult?.totalVote || 0)), 2)}</span>
             </Tooltip>
           </Box>
-          <Box className={'flex_justify_between'} sx={{ mt: 2 }}>
+          {/* <Box className={'flex_justify_between'} sx={{ mt: 2 }}>
             <Typography color="secondary.light">Quorum</Typography>
             {getQuorumView(
               Number(data.votingResult?.status),
               Number(data.votingResult?.forVotes),
               Number(data.votingResult?.quorum)
             )}
-          </Box>
+          </Box> */}
           <Box className={'flex_justify_between'} sx={{ mt: 2 }}>
             <Typography color="secondary.light">Total voting power</Typography>
             <Tooltip title={Number(data.votingResult?.totalVotingPower).toFixed(2)} arrow placement="left">

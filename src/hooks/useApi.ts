@@ -10,7 +10,6 @@ export function useApi() {
     const ipfsURL = 'https://daas.infura-ipfs.io/ipfs';
     const ipfsUploadURL = 'https://ipfs.infura.io:5001/api/v0'
     return {
-      dashboardClient: axios.create({ baseURL: `${baseURL}/` }),
       client: axios.create({ baseURL: baseURL }),
       ipfsClient: axios.create({baseURL: `${ipfsURL}/`}),
       ipfsUploadClient: axios.create({baseURL: `${ipfsUploadURL}`})

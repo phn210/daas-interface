@@ -1,10 +1,25 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { Box, Button, Chip, Grid, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
+import CopyButton from 'src/components/CopyButton';
+import { useGovernorContract } from 'src/hooks/useContract';
+import { useAppContext } from 'src/contexts/app-context';
+import { useWeb3Context } from 'src/contexts/web3-context';
+import { useDAOContext } from 'src/contexts/dao-context';
+import { useApi } from 'src/hooks/useApi';
+import useNotifier from 'src/hooks/useNotifier';
+import { getDescriptionHash } from 'src/utils/ipfs';
 import ActionList from './ActionList';
 import ProposalInfoForm from './ProposalInfoForm';
 
 export default function ProposalCreation() {
+    const ZERO_ADDRESS = '0x'+'0'.repeat(40);
+    const { address, chain } = useWeb3Context();
+    const { data } = useDAOContext();
+    const governorContract = useGovernorContract(data.dao.governor ?? ZERO_ADDRESS, true);
+    const { ipfsUploadClient } = useApi();
+
     const mockIpfs = {
         daoId: '',
         chainId: '4',
@@ -26,12 +41,11 @@ export default function ProposalCreation() {
             >   
                 <Grid
                     item xs={10} lg={12} mb={3}
-                    container justifyContent="flex-start"
+                    container justifyContent="space-between"
                 >
                     <RouterLink to={'./'.replace('/create', '')}>
                         <Button variant='contained' sx={{mr:2}}>Back</Button>
                     </RouterLink>
-                    <Chip label="2/3" variant='outlined'/>
                     <Button
                         variant='contained'
                         sx={{ml:2}}

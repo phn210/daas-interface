@@ -21,7 +21,7 @@ export default function Main() {
                 justifyContent="center"
             >
                 <Grid
-                    item xs={12} md={10}
+                    item xs={12} sm={8} md={10}
                     container
                     rowSpacing={{ xs: 2 }}
                 >
@@ -38,7 +38,7 @@ export default function Main() {
                             }}
                         />
                         <RouterLink to={'/daos/create'} style={{ textDecoration: 'none' }}>
-                            <Button variant='contained' size='large' sx={{ ml:3 }} >Create DAO</Button>
+                            <Button variant='contained' size='large' sx={{ ml:3, minWidth: 150 }} >Create DAO</Button>
                         </RouterLink>
                     </Grid>
                 </Grid>

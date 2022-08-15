@@ -61,7 +61,7 @@ export default function ProposalInfor() {
                 Download
               </Button>
             </span>
-            <span>
+            {/* <span>
               <TwitterShareButton
                 title={data.proposalContent?.title || 'No title'}
                 url={window.location.href}
@@ -72,7 +72,7 @@ export default function ProposalInfor() {
                   Share on twitter
                 </Button>
               </TwitterShareButton>
-            </span>
+            </span> */}
           </div>
         </Grid>
       </Grid>

@@ -22,16 +22,18 @@ export interface UserVoteInfor {
   weight: number | string;
   isVoted: boolean;
   votedPower: number | string;
-  votedChoice: 'For' | 'Against';
+  votedChoice: 'For' | 'Against' | 'Abstain';
   votedTimestamp: number | string;
 }
 
 export interface VotingResultDetail {
-  forVotes: number | string;
   startBlock: string;
+  forVotes: number | string;
   forVotesPercentage: number | string;
   againstVotes: number | string;
   againstVotesPercentage: number | string;
+  abstainVotes: number | string;
+  abstainVotesPercentage: number | string;
   status: number | string;
   quorum: string;
   currentVotes: string;

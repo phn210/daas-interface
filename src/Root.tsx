@@ -15,9 +15,9 @@ import { Web3Provider } from './contexts/web3-context';
 import { CHAIN_IDS } from './contexts/web3-context/chains';
 import { DetailProposalProvider } from 'src/contexts/detail-proposal-context';
 
-let allowedChainIds: number[] = [CHAIN_IDS.BSC_MAINNET];
+let allowedChainIds: number[] = [CHAIN_IDS.BSC_MAINNET, CHAIN_IDS.ETH_MAINNET];
 if (isEnableTestnet) {
-  allowedChainIds = allowedChainIds.concat([CHAIN_IDS.BSC_TESTNET]);
+  allowedChainIds = allowedChainIds.concat([CHAIN_IDS.BSC_TESTNET, CHAIN_IDS.RINKEBY]);
 }
 
 const notistackRef = React.createRef<SnackbarProvider>();

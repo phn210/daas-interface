@@ -16,6 +16,8 @@ import {
   Multicall__factory,
   Timelock,
   Timelock__factory,
+  Votes,
+  Votes__factory
 } from 'src/contracts/typechain';
 
 const ZERO_ADDRESS = '0x'+'0'.repeat(40);
@@ -107,10 +109,10 @@ export function useERC721VotesContract(address?: string, withSigner?: boolean) {
   );
 }
 
-export function useVotesContract(address?: string, standard?: number, withSigner?: boolean) {
-  if (standard == 0) {
-    return useERC20VotesContract(address, withSigner);
-  } else if (standard == 1) {
-    return useERC721VotesContract(address, withSigner);
-  } else return null;
+export function useVotesContract(address?: string, withSigner?: boolean) {
+  return useContract<Votes>(
+    address ?? ZERO_ADDRESS,
+    Votes__factory.connect,
+    withSigner
+  )
 }

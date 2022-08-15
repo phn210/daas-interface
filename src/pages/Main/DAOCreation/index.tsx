@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Wallet, utils, BigNumber, BigNumberish } from 'ethers';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -195,7 +194,7 @@ export default function DAOCreation() {
             infoHash: getDescriptionHash(ipfsHash)
         }
         const res = await createDAO(newDAO);
-        console.log(res);
+        history.push('/');
     }
 
     return (

@@ -24,7 +24,7 @@ export default function ProposalInfoForm() {
             </Grid>
             <Grid container spacing={2} justifyContent='center' mt={1}>
                 <Grid item xs={4} mt={1}>
-                    <Typography>Organizations</Typography>
+                    <Typography>Organization</Typography>
                 </Grid>
                 <Grid item xs={8}>
                     <TextField
@@ -84,7 +84,7 @@ export default function ProposalInfoForm() {
             </Grid>
             <Grid container spacing={2} justifyContent='center' mt={1}>
                 <Grid item xs={4} mt={1}>
-                    <Typography>Description URL</Typography>
+                    <Typography>Discussion URL</Typography>
                 </Grid>
                 <Grid item xs={8}>
                     <TextField

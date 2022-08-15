@@ -33,7 +33,8 @@ export default function Sidebar() {
                     className=
                       {clsx({
                       active:
-                        nav.navLink === location.pathname ||
+                        // nav.navLink === location.pathname ||
+                        location.pathname.includes(nav.navLink) ||
                         (nav.activePattern && new RegExp(nav.activePattern).test(location.pathname)),
                       })}
                     sx={{

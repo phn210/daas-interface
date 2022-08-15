@@ -21,3 +21,17 @@ export interface Proposal {
   stateTimestamp?: number | string;
   stateText?: string;
 }
+
+export interface Author {
+  name: string;
+  handle?: string;
+}
+
+export interface IPFS {
+  title: string;
+  authors: Author[];
+  organiztion?: string[];
+  discussionUrl: string;
+  shortDescription: string;
+  description: string;
+}
