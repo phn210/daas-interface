@@ -26,34 +26,6 @@ export default function ProposalList(props: ProposalListProps) {
   const params: Params = useParams();
 
   const list = useMemo(() => {
-    // if (props.filterState) {
-    //   const lengthFilterArr = props.filterState.length || 0;
-    //   if (lengthFilterArr != 0) {
-    //     const dataFilter = [];
-    //     const dataProposalList = data?.proposalList ? Object.values(data.proposalList) : [];
-    //     const lengthProposal = dataProposalList.length;
-    //     for (let i = 0; i < lengthProposal; i++) {
-    //       for (let j = 0; j < lengthFilterArr; j++) {
-    //         if (dataProposalList[i].status == props.filterState[j]) {
-    //           dataFilter.push(dataProposalList[i]);
-    //           break;
-    //         }
-    //       }
-    //     }
-
-    //     if (props.searchName) {
-    //       const dataFilterAndSearch = [];
-    //       const lengthDataFilter = dataFilter.length;
-    //       for (let i = 0; i < lengthDataFilter; i++) {
-    //         if (dataFilter[i].title.toLocaleLowerCase().includes(props.searchName.toLocaleLowerCase())) {
-    //           dataFilterAndSearch.push(dataFilter[i]);
-    //         }
-    //       }
-    //       return dataFilterAndSearch;
-    //     }
-    //     return dataFilter;
-    //   }
-    // }
 
     if (props.searchName) {
       const dataSearch = [];

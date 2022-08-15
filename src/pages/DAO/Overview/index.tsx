@@ -261,27 +261,6 @@ export default function Overview() {
                                         </Typography>
                                     </Box>
                                 </Grid>
-                                {/* <Grid item xs={12}>
-                                    <Typography color='text.primary' variant='h5'>
-                                    Admins
-                                    </Typography>
-                                    <Box
-                                        minHeight='85px'
-                                        sx={{ 
-                                            mt: 2,
-                                            p: 4,
-                                            bgcolor: 'background.paper',
-                                            borderRadius: '12px'
-                                        }}
-                                    >
-                                        <Typography
-                                            color={data.dao.isRetired ? 'red' : 'green'}
-                                            variant='body2'
-                                        >
-                                            {(data.dao.isRetired ? 'Retired' : 'Active')}
-                                        </Typography>
-                                    </Box>
-                                </Grid> */}
                             </Grid>
                         </Grid>
 
