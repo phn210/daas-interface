@@ -68,10 +68,10 @@ export function ProposalsProvider({ children }: BaseContextProps) {
 				againstVotesPercentage: totalVotes.isEqualTo(BN(0))
 					? '0'
 					: BN(decodeProposalData.againstVotes).div(totalVotes).times(100).toString(),
-				abstainVotes: BN(decodeProposalData.againstVotes).div(BASE18).toString(),
+				abstainVotes: BN(decodeProposalData.abstainVotes).div(BASE18).toString(),
 				abstainVotesPercentage: totalVotes.isEqualTo(BN(0))
 					? '0'
-					: BN(decodeProposalData.againstVotes).div(totalVotes).times(100).toString(),
+					: BN(decodeProposalData.abstainVotes).div(totalVotes).times(100).toString(),
 				
 				title: proposals[indexes[i]]?.title,
 				// stateTimestamp: normalizedBackendProposals[proposalIndexes[i]]?.state_timestamp,

@@ -100,6 +100,12 @@ export default function VotingResult() {
             valuePercentage={Number(data.votingResult?.againstVotesPercentage)}
             style={{ maxWidth: 'unset' }}
           />
+          <RangeStick
+            type="Against"
+            valueCount={Number(data.votingResult?.abstainVotes)}
+            valuePercentage={Number(data.votingResult?.abstainVotesPercentage)}
+            style={{ maxWidth: 'unset' }}
+          />
           <br />
           <div className={'flex_justify_between'}>
             <Typography color="secondary.light">Status</Typography>
