@@ -56,7 +56,7 @@ export function ProposalsProvider({ children }: BaseContextProps) {
 			
 			const decodedProposals: Proposal[] = encodedProposalsInfo.map((dataEncoded: Array<string>, i: number) => {
 				const decodeProposalData = decodeProposalList(dataEncoded);
-				const totalVotes = BN(decodeProposalData.forVotes).plus(BN(decodeProposalData.againstVotes));
+				const totalVotes = BN(decodeProposalData.forVotes).plus(BN(decodeProposalData.againstVotes)).plus(BN(decodeProposalData.abstainVotes));
 				return {
 				...decodeProposalData,
 
