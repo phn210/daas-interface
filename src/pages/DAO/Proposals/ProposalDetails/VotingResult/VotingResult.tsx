@@ -100,8 +100,9 @@ export default function VotingResult() {
             valuePercentage={Number(data.votingResult?.againstVotesPercentage)}
             style={{ maxWidth: 'unset' }}
           />
+          <br />
           <RangeStick
-            type="Against"
+            type="Abstain"
             valueCount={Number(data.votingResult?.abstainVotes)}
             valuePercentage={Number(data.votingResult?.abstainVotesPercentage)}
             style={{ maxWidth: 'unset' }}
