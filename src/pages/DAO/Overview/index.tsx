@@ -165,7 +165,9 @@ export default function Overview() {
                                                         <ListItem 
                                                             key={'governorContract'}
                                                             secondaryAction={
-                                                                <IconButton edge="end" aria-label="delete">
+                                                                <IconButton
+                                                                    onClick={() => window.open(CHAINS[Number(data.dao.chainId)]?.blockExplorerUrls?.at(0)+'/address/'+data.contracts.governor, '_blank')}
+                                                                    edge="end" aria-label="delete">
                                                                     <LaunchIcon />
                                                                 </IconButton>
                                                             }
@@ -181,7 +183,9 @@ export default function Overview() {
                                                             <ListItem 
                                                                 key={`timelockContract${index}}`}
                                                                 secondaryAction={
-                                                                    <IconButton edge="end" aria-label="delete">
+                                                                    <IconButton 
+                                                                        onClick={() => window.open(CHAINS[Number(data.dao.chainId)]?.blockExplorerUrls?.at(0)+'/address/'+timelock, '_blank')}
+                                                                        edge="end" aria-label="delete">
                                                                         <LaunchIcon />
                                                                     </IconButton>
                                                                 }
@@ -197,7 +201,10 @@ export default function Overview() {
                                                         <ListItem 
                                                             key={'votesContract'}
                                                             secondaryAction={
-                                                                <IconButton edge="end" aria-label="delete">
+                                                                <IconButton 
+                                                                    onClick={() => window.open(CHAINS[Number(data.dao.chainId)]?.blockExplorerUrls?.at(0)+'/address/'+data.contracts.votes, '_blank')}
+                                                                    edge="end"
+                                                                    aria-label="delete">
                                                                     <LaunchIcon />
                                                                 </IconButton>
                                                             }

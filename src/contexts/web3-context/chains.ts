@@ -79,8 +79,8 @@ const CHAINS: { [chainId: number]: ExtendedChainInformation } = {
     blockExplorerUrls: ['https://rinkeby.etherscan.io'],
     nativeCurrency: ETH,
     urls: [
-      process.env.INFURA_KEY ? `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}` : '',
-      'https://cloudflare-eth.com',
+      'https://nd-324-694-649.p2pify.com/d6d89986f801b6240a737d1ebad1a923',
+      'https://ethereum-rinkeby-rpc.allthatnode.com/'
     ].filter((url) => url !== ''),
   },
   [CHAIN_IDS.BSC_MAINNET]: {
