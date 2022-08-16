@@ -34,7 +34,7 @@ export default function Header() {
           <RouterLink to="/">
             <img
               src={buildPathToPublicResource(`images/logos/logo_${mode}_daas.png`)}
-              alt="trava logo"
+              alt="daas logo"
               width={120}
               style={{ display: 'block' }}
             />

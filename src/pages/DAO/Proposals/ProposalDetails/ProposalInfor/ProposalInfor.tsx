@@ -61,18 +61,6 @@ export default function ProposalInfor() {
                 Download
               </Button>
             </span>
-            {/* <span>
-              <TwitterShareButton
-                title={data.proposalContent?.title || 'No title'}
-                url={window.location.href}
-                hashtags={['Trava', 'TravaGovernance']}
-              >
-                <Button color="secondary" style={{ padding: '5px 0px', fontWeight: 'normal', whiteSpace: 'nowrap' }}>
-                  <TwitterCircleIcon style={{ marginRight: '5px' }} />
-                  Share on twitter
-                </Button>
-              </TwitterShareButton>
-            </span> */}
           </div>
         </Grid>
       </Grid>

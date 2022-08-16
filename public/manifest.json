@@ -1,21 +1,11 @@
 {
-  "short_name": "Trava Governance App",
-  "name": "Trava Governance App",
+  "short_name": "Dao as a Service App",
+  "name": "Dao as a Service App",
   "icons": [
     {
-      "src": "/governance/favicon.ico",
+      "src": "/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
-    },
-    {
-      "src": "/governance/images/logos/logo64.png",
-      "type": "image/png",
-      "sizes": "64x64"
-    },
-    {
-      "src": "/governance/images/logos/logo256.png",
-      "type": "image/png",
-      "sizes": "256x256"
     }
   ],
   "start_url": ".",
